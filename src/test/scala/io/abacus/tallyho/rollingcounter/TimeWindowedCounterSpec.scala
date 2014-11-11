@@ -4,7 +4,7 @@ import org.scalatest.WordSpec
 import org.scalatest.ParallelTestExecution
 import org.scalatest.ShouldMatchers
 
-class TimeWindowedCounterSpec extends WordSpec with ShouldMatchers with ParallelTestExecution {
+class TimeWindowedCounterSpec extends WordSpec with ShouldMatchers {
   "The TimeWindowsCounter" should {
     "not be too crazy" in {
       val a = new TimeWindowedCounter[String](100,10)

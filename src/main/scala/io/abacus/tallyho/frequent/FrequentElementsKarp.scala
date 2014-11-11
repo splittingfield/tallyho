@@ -1,7 +1,6 @@
-package io.abacus.tallyho
-import org.cliffc.high_scale_lib.NonBlockingHashMap
-import org.cliffc.high_scale_lib.NonBlockingHashSet
-import org.cliffc.high_scale_lib.Counter
+package io.abacus.tallyho.frequent
+
+import org.cliffc.high_scale_lib.{Counter, NonBlockingHashMap, NonBlockingHashSet}
 
 //Implementation of A Simple Algorithm for Finding Frequent Elements in Streams and Bags
 // http://www.cs.yale.edu/homes/el327/datamining2011aFiles/ASimpleAlgorithmForFindingFrequentElementsInStreamsAndBags.pdf

@@ -1,4 +1,5 @@
-package io.abacus.tallyho
+package io.abacus.tallyho.sampling
+
 import scala.collection.mutable.Set
 import scala.util.Random
 

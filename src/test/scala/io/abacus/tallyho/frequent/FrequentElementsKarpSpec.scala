@@ -1,4 +1,4 @@
-package io.abacus.tallyho
+package io.abacus.tallyho.frequent
 
 import org.scalatest.{ShouldMatchers, WordSpec}
 
