@@ -9,8 +9,8 @@ class TopKPipelineSpec extends WordSpec with ShouldMatchers {
     "compute the top K with algebird and streamlib" in {
       val data = List("apple", "orange", "apple", "banana", "persimmon", "apple", "persimmon")
 
-      val streamPipe = new TopKPipeline(2, new StreamLibStreamSummary())
-      val algebirdPipe = new TopKPipeline(2, new AlgebirdStreamSummary())
+      val streamPipe = new TopKPipeline(2, new StreamLibStreamSummary(10))
+      val algebirdPipe = new TopKPipeline(2, new AlgebirdStreamSummary(10))
 
       val combinedPipe = streamPipe alongWith algebirdPipe
       data.foreach(combinedPipe.process)
@@ -20,8 +20,6 @@ class TopKPipelineSpec extends WordSpec with ShouldMatchers {
           streamTopK should be (algebirdTopK)
           streamTopK.head should be (("apple", 3))
       }
-
-
     }
   }
 

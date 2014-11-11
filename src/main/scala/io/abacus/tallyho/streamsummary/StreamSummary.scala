@@ -14,8 +14,8 @@ trait TopKInterface {
   def top(k:Int):Seq[(String,Long)]
 }
 
-class StreamLibStreamSummary() extends TopKInterface {
-  val topK = new StreamSummary[String](10)
+class StreamLibStreamSummary(width:Int) extends TopKInterface {
+  val topK = new StreamSummary[String](width)
   def process(elem:String) = {
     topK.offer(elem)
   }
@@ -27,12 +27,14 @@ class StreamLibStreamSummary() extends TopKInterface {
 
 }
 
-class AlgebirdStreamSummary() extends TopKInterface {
+// It seems algebird does not implement a SSZero... so we have to play some locking
+// games.
+class AlgebirdStreamSummary(width:Int) extends TopKInterface {
   val ssm = new SpaceSaverSemigroup[String]
   val summary = new AtomicReference[SpaceSaver[String]]()
   def process(elem:String) = {
-    if(!(summary.get eq null) || !summary.compareAndSet(null, SpaceSaver(10, elem)))
-      summary.set(ssm.plus(summary.get, SpaceSaver(10,elem)))
+    if(!(summary.get eq null) || !summary.compareAndSet(null, SpaceSaver(width, elem)))
+      summary.set(ssm.plus(summary.get, SpaceSaver(width,elem)))
   }
 
   def top(k:Int) = {

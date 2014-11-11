@@ -47,7 +47,7 @@ class PipelineSpec extends WordSpec with ShouldMatchers {
       b.process("b")
       b.process("b")
 
-      b.results should be (MMap("a"->1, "b"->2)::3 :: HNil)
+      b.results should be (MMap("a"->1, "b"->2) :: 3 :: HNil)
     }
 
     "count words length and then pipe into sum with andThen" in {
