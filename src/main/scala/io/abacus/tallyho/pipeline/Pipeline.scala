@@ -1,4 +1,4 @@
-package io.abacus.tallyho
+package io.abacus.tallyho.pipeline
 
 import shapeless._
 import shapeless.ops.hlist._

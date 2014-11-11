@@ -1,9 +1,10 @@
-package io.abacus.tallyho
+package io.abacus.tallyho.pipeline
 
 import org.scalatest.WordSpec
 import org.scalatest.ShouldMatchers
 import shapeless.HNil
-import scala.collection.mutable.{Map =>  MMap, HashMap}
+
+import scala.collection.mutable.{HashMap, Map => MMap}
 
 class PipelineSpec extends WordSpec with ShouldMatchers {
   // Simple WordCounter to test things

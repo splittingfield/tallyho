@@ -4,6 +4,8 @@
 # sbt specific
 .cache/
 .history/
+.idea/
+.idea_modules/
 .lib/
 dist/*
 target/

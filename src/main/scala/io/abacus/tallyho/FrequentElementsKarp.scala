@@ -3,6 +3,9 @@ import org.cliffc.high_scale_lib.NonBlockingHashMap
 import org.cliffc.high_scale_lib.NonBlockingHashSet
 import org.cliffc.high_scale_lib.Counter
 
+//Implementation of A Simple Algorithm for Finding Frequent Elements in Streams and Bags
+// http://www.cs.yale.edu/homes/el327/datamining2011aFiles/ASimpleAlgorithmForFindingFrequentElementsInStreamsAndBags.pdf
+
 class FrequentElementsKarp[T](theta:Double) {
   val K = new NonBlockingHashSet[T]()
   val count = new NonBlockingHashMap[T,Counter]()
