@@ -16,9 +16,8 @@ trait TopKInterface {
 
 class StreamLibStreamSummary(width:Int) extends TopKInterface {
   val topK = new StreamSummary[String](width)
-  def process(elem:String) = {
-    topK.offer(elem)
-  }
+  def process(elem:String) = topK.offer(elem)
+
 
   def top(k:Int) = {
     val a = topK.topK(k)

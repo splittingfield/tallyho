@@ -2,9 +2,10 @@ package io.abacus.tallyho.hyperloglog
 
 
 
-import com.clearspring.analytics.stream.cardinality.HyperLogLog
 
 import io.abacus.tallyho.pipeline.SimplePipeline
+
+import com.clearspring.analytics.stream.cardinality.HyperLogLog
 
 import com.twitter.algebird.HyperLogLog._
 import com.twitter.algebird.{HLL, HyperLogLogMonoid}
@@ -16,6 +17,9 @@ trait HyperLogLogInterface {
 }
 
 
+// creates HLL with accuracy  accuracy = 1.04/sqrt(2^log2m)
+// m is the number of counters
+
 class AlgebirdHLL() extends HyperLogLogInterface  {
   val hll = new HyperLogLogMonoid(12)
   var sumHll = hll.zero
@@ -24,7 +28,8 @@ class AlgebirdHLL() extends HyperLogLogInterface  {
     val item = hll(elem.getBytes)
     sumHll = hll.plus(sumHll, item)
   }
-  def estimate = {
+  de
+  f estimate = {
     val approxSize = hll.sizeOf(sumHll)
     approxSize.estimate
   }
@@ -33,6 +38,7 @@ class AlgebirdHLL() extends HyperLogLogInterface  {
 }
 
 class StreamLibHLL() extends HyperLogLogInterface  {
+
   val hll = new HyperLogLog(12)
 
   def estimate =  hll.cardinality()

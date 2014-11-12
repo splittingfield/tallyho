@@ -4,16 +4,18 @@ import org.cliffc.high_scale_lib.{Counter, NonBlockingHashMap}
 
 import scala.collection.mutable.HashMap
 
+// Not a streaming algorithm, as the storage is a function of the number of unique
+// elements in the stream. Useful for when you know this is constant.
+// Memory overhead: Number of unique items * number of buckets * size of counter
+
 class RollingCounter[T](buckets:Int) {
   private val data = new NonBlockingHashMap[T,Array[Counter]]()
   private val currentBucket = new Counter
-
 
   def increment(thing:T) = {
     val index = currentBucket.longValue % buckets
     incrementWithBucket(thing,index.toInt)
   }
-
 
   def incrementWithBucket(thing:T, bucket:Int) = {
     val value = getBuckets(thing)
@@ -21,13 +23,12 @@ class RollingCounter[T](buckets:Int) {
 
   }
 
-
   def count(thing:T):Long = {
     val array = data.get(thing)
     if(array == null) 0L
     else {
-      var i = 0;
-      var sum = 0L;
+      var i = 0
+      var sum = 0L
       while( i < buckets) {
         sum += array(i).estimate_get
         i = i+1
@@ -56,12 +57,6 @@ class RollingCounter[T](buckets:Int) {
 
   }
 
-
-
-
-
-
-
   def resetAllCountsForBucket(bucket:Int) {
     val keys = data.keySet
     val it = keys.iterator
@@ -76,8 +71,6 @@ class RollingCounter[T](buckets:Int) {
     val value = getBuckets(thing)
     value(bucket) = new Counter
   }
-
-
 
   private def getBuckets(thing:T) = {
     val array = data.get(thing)
