@@ -17,7 +17,7 @@ data Result = Result { cms :: CountMinSketch Text
 
 -- | Read UTF-8 encoded text from a bytestream source, and count both
 -- individual and distinct words.
-wordCounter :: (MonadThrow m, MonadBaseControl b m, PrimMonad b) => Sink ByteString m Result
+wordCounter :: (MonadThrow m, MonadBase b m, PrimMonad b) => Sink ByteString m Result
 wordCounter =
   decodeUtf8C $= linesUnboundedC
               $= awaitForever (mapM_ yield . splitOn " ")
