@@ -28,8 +28,7 @@ class AlgebirdHLL() extends HyperLogLogInterface  {
     val item = hll(elem.getBytes)
     sumHll = hll.plus(sumHll, item)
   }
-  de
-  f estimate = {
+  def estimate = {
     val approxSize = hll.sizeOf(sumHll)
     approxSize.estimate
   }
