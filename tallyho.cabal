@@ -24,7 +24,8 @@ library
   -- other-extensions:    
   build-depends:       base >=4.7 && <4.8,
                        classy-prelude-conduit,
-                       hyperloglog,
+                       hyperloglog >= 0.3,
+                       bytes,
                        lens,
                        approximate,
                        binary,
